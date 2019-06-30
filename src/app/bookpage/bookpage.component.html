@@ -1,0 +1,69 @@
+<div class="container" style="height: 100%; min-height: 100%; margin-top: 150px; margin-bottom: 150px">
+    <form [formGroup]="form" class="row" (ngSubmit)="submitForm()"
+        style="width: 100%; margin-left: auto; margin-right: auto; margin-top: 5%">
+        <div class="col-md-4 offset-md-4 col-xs-12 col-sm-12">
+
+            <input matInput placeholder="Show Number" class="form-control" formControlName="showNumber" id="showNumber">
+
+        </div>
+
+        <div class="col-md-4 offset-md-4 col-xs-12 col-sm-12">
+
+            <input matInput placeholder="Seat Number" class="form-control" formControlName="seatNumber" id="seatNumber" >
+        </div>
+
+        <div class="col-md-2 offset-md-5 col-xs-12 col-sm-12" style="margin-top: 20px">
+            <button style="position: relative; width: 100%" type="submit" class="btn btn-secondary">
+                <div class="rippleJS" id="btnSubmit"></div>
+                Book Ticket
+            </button>
+        </div>
+
+        <div class="col-md-4 offset-md-4 col-xs-12 col-sm-12" >
+            <div style="margin-top: 10%; width: 100%">
+                    <div style="font-size: 16px; font-weight: bold">
+                            Tickets Payment Details:
+                    </div>
+                    <div *ngIf="result.subTotal">
+                            SubTotal Rs: {{result.subTotal}}
+                        </div>
+                        <div *ngIf="result.serviceTax">
+                            Service Tax @14% Rs: {{result.serviceTax | number:'1.0-2'}}
+                        </div>
+                        <div *ngIf="result.swachhBharta">
+                            Swachh Bharat Cess @0.5%: {{result.swachhBharta | number:'1.0-2'}}
+                        </div>
+                        <div *ngIf="result.krishiKalyanCess"> 
+                            Krishi Kalyan Cess @0.5%: {{result.krishiKalyanCess | number:'1.0-2' }}
+                        </div>
+                        <div *ngIf="result.total">
+                            Total: Rs: {{result.total}}
+                        </div>
+                        <div *ngIf="result != {}">
+                                {{result}}
+                        </div>
+            </div>
+            <div style="margin-top: 10%; width: 100%">
+                <div style="font-size: 16px; font-weight: bold">
+                        Total Sales:
+                </div>
+               
+                <div *ngIf="result.total">
+                        Revenue:: Rs: {{totalSale.total}}
+                    </div>
+                    <div *ngIf="result.serviceTax">
+                        Service Tax @14% Rs: {{totalSale.serviceTax | number:'1.0-2'}}
+                    </div>
+                    <div *ngIf="result.swachhBharta">
+                        Swachh Bharat Cess @0.5%: {{totalSale.swachhBharta | number:'1.0-2'}}
+                    </div>
+                    <div *ngIf="result.krishiKalyanCess"> 
+                        Krishi Kalyan Cess @0.5%: {{totalSale.krishiKalyanCess | number:'1.0-2' }}
+                    </div>
+                   
+                        
+            </div>
+           
+        </div>
+    </form>
+</div>
