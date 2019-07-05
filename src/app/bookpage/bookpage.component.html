@@ -1,54 +1,80 @@
-<div class="container" style="height: 100%; min-height: 100%; margin-top: 150px; margin-bottom: 150px">
-    <form [formGroup]="form" class="row" (ngSubmit)="submitForm()"
-        style="width: 100%; margin-left: auto; margin-right: auto; margin-top: 5%">
-        <div class="col-md-4 offset-md-4 col-xs-12 col-sm-12">
 
-            <input matInput placeholder="Show Number" class="form-control" formControlName="showNumber" id="showNumber">
+<div class="container">
+
+    <!-- Generate the seating grid -->
+    <div class="buttonBar marginTop5">
+        <button (click)="selectShow(0)" class="btn btn-info showBtn">Show 1</button>
+        <button (click)="selectShow(1)" class="btn btn-info showBtn">
+            Show 2</button>
+        <button (click)="selectShow(2)" class="btn btn-info showBtn">
+            Show 3</button>
+    </div>
+    <div class="row">
+        <div class="col-2">
 
         </div>
+        <div class="col-8">
+            <div *ngIf="displayShowSeats">
+                <div class="seatDiv">
+                    <span class="seat" *ngFor="let seat of displaySeat" (click)="seatClicked(seat)"
+                        [ngSwitch]="getStatus(seat)">
+                        <span *ngSwitchCase="'selected'" class="glyphicon glyphicon-ok-sign selectedSeat"></span>
+                        <span *ngSwitchCase="'reserved'" class="glyphicon glyphicon-ban-circle reservedSeat"></span>
+                        <span *ngSwitchDefault class="glyphicon glyphicon-stop freeSeat"></span>
+                        {{seat}}
+                    </span>
 
-        <div class="col-md-4 offset-md-4 col-xs-12 col-sm-12">
 
-            <input matInput placeholder="Seat Number" class="form-control" formControlName="seatNumber" id="seatNumber" >
-        </div>
-
-        <div class="col-md-2 offset-md-5 col-xs-12 col-sm-12" style="margin-top: 20px">
-            <button style="position: relative; width: 100%" type="submit" class="btn btn-secondary">
-                <div class="rippleJS" id="btnSubmit"></div>
-                Book Ticket
-            </button>
-        </div>
-
-        <div class="col-md-4 offset-md-4 col-xs-12 col-sm-12" >
-            <div style="margin-top: 10%; width: 100%">
-                    <div style="font-size: 16px; font-weight: bold">
-                            Tickets Payment Details:
-                    </div>
-                    <div *ngIf="result.subTotal">
-                            SubTotal Rs: {{result.subTotal}}
-                        </div>
-                        <div *ngIf="result.serviceTax">
-                            Service Tax @14% Rs: {{result.serviceTax | number:'1.0-2'}}
-                        </div>
-                        <div *ngIf="result.swachhBharta">
-                            Swachh Bharat Cess @0.5%: {{result.swachhBharta | number:'1.0-2'}}
-                        </div>
-                        <div *ngIf="result.krishiKalyanCess"> 
-                            Krishi Kalyan Cess @0.5%: {{result.krishiKalyanCess | number:'1.0-2' }}
-                        </div>
-                        <div *ngIf="result.total">
-                            Total: Rs: {{result.total}}
-                        </div>
-                        <div *ngIf="result != {}">
-                                {{result}}
-                        </div>
-            </div>
-            <div style="margin-top: 10%; width: 100%">
-                <div style="font-size: 16px; font-weight: bold">
-                        Total Sales:
                 </div>
-               
-                <div *ngIf="result.total">
+            </div>
+        </div>
+        <div class="col-2">
+
+        </div>
+    </div>
+
+
+
+    <div class="row">
+        <div class="col-2">
+
+        </div>
+        <div class="col-8">
+            <div *ngIf="selected.length > 0" class="font14 marginTB10">
+                    <div class="wordWrap">SEATS RESERVED : {{selected.length}} <span class="count">({{selected}})</span>
+                <div class="ticketAmmount">
+                        <div *ngIf="result.subTotal">
+                                SubTotal Rs: {{result.subTotal}}
+                            </div>
+                            <div *ngIf="result.serviceTax">
+                                Service Tax @14% Rs: {{result.serviceTax | number:'1.0-2'}}
+                            </div>
+                            <div *ngIf="result.swachhBharta">
+                                Swachh Bharat Cess @0.5%: {{result.swachhBharta | number:'1.0-2'}}
+                            </div>
+                            <div *ngIf="result.krishiKalyanCess">
+            
+                                Krishi Kalyan Cess @0.5%: {{result.krishiKalyanCess | number:'1.0-2' }}
+                            </div>
+                            <div *ngIf="result.total">
+                                Total: Rs: {{result.total}}
+                            </div>
+                            <div *ngIf="result != {}">
+                                {{result}}
+                            </div>
+                        </div>
+                      
+                </div>
+                
+
+                <div class="theater-profit">
+                        Total Theater Revenu:
+                    <div style="font-size: 16px; font-weight: bold">
+                       
+                        Total Sales:
+                    </div>
+
+                    <div *ngIf="result.total">
                         Revenue:: Rs: {{totalSale.total}}
                     </div>
                     <div *ngIf="result.serviceTax">
@@ -57,13 +83,29 @@
                     <div *ngIf="result.swachhBharta">
                         Swachh Bharat Cess @0.5%: {{totalSale.swachhBharta | number:'1.0-2'}}
                     </div>
-                    <div *ngIf="result.krishiKalyanCess"> 
+                    <div *ngIf="result.krishiKalyanCess">
                         Krishi Kalyan Cess @0.5%: {{totalSale.krishiKalyanCess | number:'1.0-2' }}
                     </div>
-                   
-                        
+
+
+                </div>
+
             </div>
-           
+
         </div>
-    </form>
+        <div class="col-2">
+
+        </div>
+    </div>
+
+
+    <!-- Action buttons -->
+    <div class="buttonBar marginTop5">
+        <button style="margin: 5px" (click)="clearSelected()" [disabled]="selected.length === 0"
+            class="btn btn-info btn-sm ">Clear</button>
+        <button (click)="showSelected()" type="submit" [disabled]="selected.length === 0"
+            class="btn btn-success btn-sm">Buy
+            Tickets</button>
+    </div>
+
 </div>

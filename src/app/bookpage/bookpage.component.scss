@@ -1,6 +1,87 @@
 .container{
     width: 100%;
     height: 100%;
+    color: #fff;
+    text-align: center;
+  
+    margin-top: 20px;
+}
+.seat {
+    padding-right: 5px;
+}
+.selectedSeat {
+    color: #5cb85c;
+}
+.reservedSeat {
+    color: #ce4844;
+}
+.freeSeat {
+    color: #fff;
+}
+
+.marginTop5{
+    margin-top: 5px;
+    padding: 10px;
+
+}
+.showBtn{
+    margin: 5px;
+}
+.seatDiv{
+    // background-color: #ce4844;
+    margin: 5px;
+    width: 500px;
+    height: 200px;
+    text-align: center;
+
+
+}
+.marginTB10 {
+    margin: 10px 0px;
+}
+.font14 {
+    font-size: 14px;
+}
+
+.seat{
     background-color: gainsboro;
-    border: black 1px solid;
+    border-radius: 4px;
+    width: 50px;
+    height: 50px;
+    display: inline-block;
+    margin: 5px;
+    color: black;
+    font-size: 16px;
+    padding-top: 10px;
+    text-align: center;
+
+}
+
+.theater-profit{
+    margin-top: 10%;
+     width: 100%;
+     text-align: center;
+     font-size: 1rem;
+     font-weight: bold;
+     color: black;
+     
+
+}
+.wordWrap {
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: black;
+    word-break: break-all;
+}
+.ticketAmmount{
+    margin-top: 10%;
+    width: 100%;
+    text-align: center;
+    font-size: 1rem;
+    
+    color: gray;
+}
+.wordWrap {
+    word-break: break-all;
 }
